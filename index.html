@@ -41,13 +41,14 @@
 
         function handleInput(e) {
           if (e.key === 'Enter') {
-            const cmd = input.value.trim();
-            // show prompt and user command separately
-            appendLine(`<span class="prompt"></span><span class="cmd-text">${cmd}</span>`);
+            const raw = input.value.trim();
+            const cmd = raw.toLowerCase();
+            // show prompt and user command separately (preserve case)
+            appendLine(`<span class="prompt"></span><span class="cmd-text">${raw}</span>`);
             if (cmd === 'clear') {
               terminal.innerHTML = '';
             } else {
-              appendLine(commands[cmd] || `bash: ${cmd}: command not found`);
+              appendLine(commands[cmd] || `bash: ${raw}: command not found`);
             }
             input.value = '';
           }
